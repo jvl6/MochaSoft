@@ -37,7 +37,7 @@ CREATE TABLE juego(
 	fk_plataforma UNIQUEIDENTIFIER REFERENCES plataforma (id),
 	fk_engine UNIQUEIDENTIFIER REFERENCES engine (id),
 	unidades BIGINT,
-	versión VARCHAR(200)
+	version FLOAT
 );
 
 CREATE TABLE staff(
@@ -51,6 +51,12 @@ CREATE TABLE juego_staff(
 	fk_staff UNIQUEIDENTIFIER REFERENCES staff (id),
 	rol VARCHAR(100)
 );
+
+CREATE TABLE staff_despedido(
+	id UNIQUEIDENTIFIER PRIMARY KEY,
+	nombre VARCHAR(200)
+);
+
 GO
 
 CREATE FUNCTION juegos_py(@anio DATE) RETURNS INT AS -- DROP FUNCTION juegos_py;
@@ -124,3 +130,24 @@ INSERT INTO juego VALUES (NEWID(), 'Frostino Simulator 2018', 'F46E9918-FD2E-4A8
 SELECT * FROM juego;
 INSERT INTO juego_staff VALUES (NEWID(), '5C2AA1EA-804E-4B78-AD86-71570557B640', '11DA3DB2-8A8D-4544-B663-FBBC6FFE70F4', 'Desarrollador Principal');
 SELECT * FROM juego_staff;
+GO
+
+CREATE TRIGGER new_update ON juego AFTER INSERT AS
+BEGIN
+	DECLARE @idJuego UNIQUEIDENTIFIER = (SELECT id FROM inserted)
+	DECLARE @version FLOAT = (SELECT version FROM inserted)
+
+	SET @version = (@version + 0.1)
+
+	UPDATE juego SET version = @version WHERE id = @idJuego
+END
+GO
+
+CREATE TRIGGER despido ON staff AFTER DELETE AS
+BEGIN
+	DECLARE @idStaff UNIQUEIDENTIFIER = (SELECT id FROM deleted)
+	DECLARE @nombre VARCHAR(200) = (SELECT nombre FROM deleted)
+
+	INSERT INTO staff_despedido VALUES(NEWID(),@nombre)
+END
+GO
