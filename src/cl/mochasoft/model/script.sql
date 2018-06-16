@@ -35,7 +35,9 @@ CREATE TABLE juego(
 	fk_genero UNIQUEIDENTIFIER REFERENCES genero (id),
 	anio_release DATE,
 	fk_plataforma UNIQUEIDENTIFIER REFERENCES plataforma (id),
-	fk_engine UNIQUEIDENTIFIER REFERENCES engine (id)
+	fk_engine UNIQUEIDENTIFIER REFERENCES engine (id),
+	unidades BIGINT,
+	versión VARCHAR(200)
 );
 
 CREATE TABLE staff(
@@ -97,12 +99,12 @@ BEGIN
 			SET @idCompania = (SELECT id FROM compania_engine WHERE nombre = @compania);
 		END
 
-		INSERT INTO engine VALUES (NEWID(), @nombrePlataforma, @idCompania);
+		INSERT INTO plataforma VALUES (NEWID(), @nombrePlataforma, @idCompania);
 	END
 
 	ELSE
 	BEGIN
-		PRINT('El engine ya existe.');
+		PRINT('La plataforma ya existe.');
 	END
 END;
 GO
