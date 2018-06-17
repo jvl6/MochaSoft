@@ -1,5 +1,11 @@
 package cl.mochasoft.gui;
 
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jorge A
@@ -22,145 +28,552 @@ public class App extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        frameBorrar = new javax.swing.JFrame();
+        pnlBorrarStaff = new javax.swing.JPanel();
+        lblDespedirStaff = new javax.swing.JLabel();
+        txtNombreStaffDespedido = new javax.swing.JTextField();
+        btnAceptarDespedirStaff = new javax.swing.JButton();
+        frameEstadisticas = new javax.swing.JFrame();
+        tpEstadisticas = new javax.swing.JTabbedPane();
+        pnlVerJuegos = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabJuegos = new javax.swing.JTable();
+        pnlVerJuegosPorAnio = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabJuegosPorAño = new javax.swing.JTable();
+        pnlVerStaff = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabStaff = new javax.swing.JTable();
+        pnlVerStaffDespedido = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabStaffDespedido = new javax.swing.JTable();
+        tbpPanel = new javax.swing.JTabbedPane();
+        pnlRegistroJuego = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        lblGenero = new javax.swing.JLabel();
+        lblAnio = new javax.swing.JLabel();
+        lblPlataforma = new javax.swing.JLabel();
+        lblEngine = new javax.swing.JLabel();
+        lblUnidadesVendidas = new javax.swing.JLabel();
+        lblVersionJuego = new javax.swing.JLabel();
+        txtTitulo = new javax.swing.JTextField();
+        txtAnio = new javax.swing.JTextField();
+        txtUnidadesVendidas = new javax.swing.JTextField();
+        txtVersion = new javax.swing.JTextField();
+        btnAceptarRegistroJuego = new javax.swing.JButton();
+        cboGenero = new javax.swing.JComboBox<>();
+        cboPlataforma = new javax.swing.JComboBox<>();
+        cboEngine = new javax.swing.JComboBox<>();
+        pnlRegistroGenero = new javax.swing.JPanel();
+        lblNombreGenero = new javax.swing.JLabel();
+        txtNombreGenero = new javax.swing.JTextField();
+        btnRegistroGenero = new javax.swing.JButton();
+        pnlRegistroPlataforma = new javax.swing.JPanel();
+        lblNombrePlataforma = new javax.swing.JLabel();
+        txtNombrePlataforma = new javax.swing.JTextField();
+        lblCompaniaPlataforma = new javax.swing.JLabel();
+        txtCompaniaPlataforma = new javax.swing.JTextField();
+        btnRegistrarPlataforma = new javax.swing.JButton();
+        pnlRegistroEngine = new javax.swing.JPanel();
+        lblNombreEngine = new javax.swing.JLabel();
+        lblCompaniaEngine = new javax.swing.JLabel();
+        txtNombreEngine = new javax.swing.JTextField();
+        txtCompaniaEngine = new javax.swing.JTextField();
+        btnRegistrarEngine = new javax.swing.JButton();
+        pnlRegistroStaff = new javax.swing.JPanel();
+        lblNombreStaff = new javax.swing.JLabel();
+        txtNombreStaff = new javax.swing.JTextField();
+        btnRegistrarStaff = new javax.swing.JButton();
+        mebApp = new javax.swing.JMenuBar();
+        menArchivo = new javax.swing.JMenu();
+        meiBorrar = new javax.swing.JMenuItem();
+        meiEstadisticas = new javax.swing.JMenuItem();
+        menAyuda = new javax.swing.JMenu();
+        meiAcercaDe = new javax.swing.JMenuItem();
+
+        pnlBorrarStaff.setBorder(javax.swing.BorderFactory.createTitledBorder("Despedir Staff"));
+
+        lblDespedirStaff.setText("Nombre:");
+
+        btnAceptarDespedirStaff.setText("Aceptar");
+
+        javax.swing.GroupLayout pnlBorrarStaffLayout = new javax.swing.GroupLayout(pnlBorrarStaff);
+        pnlBorrarStaff.setLayout(pnlBorrarStaffLayout);
+        pnlBorrarStaffLayout.setHorizontalGroup(
+            pnlBorrarStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBorrarStaffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblDespedirStaff)
+                .addGap(18, 18, 18)
+                .addComponent(txtNombreStaffDespedido, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAceptarDespedirStaff)
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+        pnlBorrarStaffLayout.setVerticalGroup(
+            pnlBorrarStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBorrarStaffLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(pnlBorrarStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDespedirStaff)
+                    .addComponent(txtNombreStaffDespedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAceptarDespedirStaff))
+                .addContainerGap(289, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout frameBorrarLayout = new javax.swing.GroupLayout(frameBorrar.getContentPane());
+        frameBorrar.getContentPane().setLayout(frameBorrarLayout);
+        frameBorrarLayout.setHorizontalGroup(
+            frameBorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frameBorrarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlBorrarStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        frameBorrarLayout.setVerticalGroup(
+            frameBorrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(frameBorrarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlBorrarStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tabJuegos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabJuegos);
+
+        javax.swing.GroupLayout pnlVerJuegosLayout = new javax.swing.GroupLayout(pnlVerJuegos);
+        pnlVerJuegos.setLayout(pnlVerJuegosLayout);
+        pnlVerJuegosLayout.setHorizontalGroup(
+            pnlVerJuegosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVerJuegosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlVerJuegosLayout.setVerticalGroup(
+            pnlVerJuegosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVerJuegosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tpEstadisticas.addTab("Ver Juegos", pnlVerJuegos);
+
+        tabJuegosPorAño.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabJuegosPorAño);
+
+        javax.swing.GroupLayout pnlVerJuegosPorAnioLayout = new javax.swing.GroupLayout(pnlVerJuegosPorAnio);
+        pnlVerJuegosPorAnio.setLayout(pnlVerJuegosPorAnioLayout);
+        pnlVerJuegosPorAnioLayout.setHorizontalGroup(
+            pnlVerJuegosPorAnioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVerJuegosPorAnioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlVerJuegosPorAnioLayout.setVerticalGroup(
+            pnlVerJuegosPorAnioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVerJuegosPorAnioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tpEstadisticas.addTab("Ver Juegos por Año", pnlVerJuegosPorAnio);
+
+        tabStaff.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tabStaff);
+
+        javax.swing.GroupLayout pnlVerStaffLayout = new javax.swing.GroupLayout(pnlVerStaff);
+        pnlVerStaff.setLayout(pnlVerStaffLayout);
+        pnlVerStaffLayout.setHorizontalGroup(
+            pnlVerStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVerStaffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlVerStaffLayout.setVerticalGroup(
+            pnlVerStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVerStaffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tpEstadisticas.addTab("Ver Staff", pnlVerStaff);
+
+        tabStaffDespedido.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tabStaffDespedido);
+
+        javax.swing.GroupLayout pnlVerStaffDespedidoLayout = new javax.swing.GroupLayout(pnlVerStaffDespedido);
+        pnlVerStaffDespedido.setLayout(pnlVerStaffDespedidoLayout);
+        pnlVerStaffDespedidoLayout.setHorizontalGroup(
+            pnlVerStaffDespedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVerStaffDespedidoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlVerStaffDespedidoLayout.setVerticalGroup(
+            pnlVerStaffDespedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVerStaffDespedidoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tpEstadisticas.addTab("Ver Staff Despedido", pnlVerStaffDespedido);
+
+        javax.swing.GroupLayout frameEstadisticasLayout = new javax.swing.GroupLayout(frameEstadisticas.getContentPane());
+        frameEstadisticas.getContentPane().setLayout(frameEstadisticasLayout);
+        frameEstadisticasLayout.setHorizontalGroup(
+            frameEstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameEstadisticasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tpEstadisticas)
+                .addContainerGap())
+        );
+        frameEstadisticasLayout.setVerticalGroup(
+            frameEstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameEstadisticasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tpEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de Juegos"));
+        pnlRegistroJuego.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setText("jLabel1");
+        lblTitulo.setText("Título:");
 
-        jLabel2.setText("jLabel2");
+        lblGenero.setText("Género:");
 
-        jLabel3.setText("jLabel3");
+        lblAnio.setText("Año:");
 
-        jLabel4.setText("jLabel4");
+        lblPlataforma.setText("Plataforma:");
 
-        jLabel5.setText("jLabel5");
+        lblEngine.setText("Engine:");
 
-        jLabel6.setText("jLabel6");
+        lblUnidadesVendidas.setText("Unidades Vendidas:");
 
-        jLabel7.setText("jLabel7");
+        lblVersionJuego.setText("Version Juego:");
 
-        jLabel8.setText("jLabel8");
+        btnAceptarRegistroJuego.setText("Aceptar");
 
-        jTextField1.setText("jTextField1");
+        cboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextField2.setText("jTextField2");
+        cboPlataforma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextField3.setText("jTextField3");
+        cboEngine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextField4.setText("jTextField4");
-
-        jTextField5.setText("jTextField5");
-
-        jTextField6.setText("jTextField6");
-
-        jTextField7.setText("jTextField7");
-
-        jTextField8.setText("jTextField8");
-
-        jButton1.setText("jButton1");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlRegistroJuegoLayout = new javax.swing.GroupLayout(pnlRegistroJuego);
+        pnlRegistroJuego.setLayout(pnlRegistroJuegoLayout);
+        pnlRegistroJuegoLayout.setHorizontalGroup(
+            pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroJuegoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField2))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField3))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField4))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField5))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField6))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField7))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextField8))))
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlRegistroJuegoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAceptarRegistroJuego))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlRegistroJuegoLayout.createSequentialGroup()
+                        .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblGenero)
+                            .addComponent(lblTitulo)
+                            .addComponent(lblAnio))
+                        .addGap(73, 73, 73)
+                        .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboGenero, javax.swing.GroupLayout.Alignment.TRAILING, 0, 405, Short.MAX_VALUE)
+                            .addComponent(txtAnio)
+                            .addComponent(txtTitulo)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlRegistroJuegoLayout.createSequentialGroup()
+                        .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPlataforma)
+                            .addComponent(lblEngine))
+                        .addGap(56, 56, 56)
+                        .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboEngine, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboPlataforma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlRegistroJuegoLayout.createSequentialGroup()
+                        .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUnidadesVendidas)
+                            .addComponent(lblVersionJuego))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtVersion)
+                            .addComponent(txtUnidadesVendidas))))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlRegistroJuegoLayout.setVerticalGroup(
+            pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroJuegoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTitulo)
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGenero)
+                    .addComponent(cboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAnio)
+                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPlataforma)
+                    .addComponent(cboPlataforma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEngine)
+                    .addComponent(cboEngine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUnidadesVendidas)
+                    .addComponent(txtUnidadesVendidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblVersionJuego)
+                    .addComponent(txtVersion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAceptarRegistroJuego)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        tbpPanel.addTab("Registro Juegos", pnlRegistroJuego);
+
+        pnlRegistroGenero.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblNombreGenero.setText("Nombre:");
+
+        btnRegistroGenero.setText("Aceptar");
+
+        javax.swing.GroupLayout pnlRegistroGeneroLayout = new javax.swing.GroupLayout(pnlRegistroGenero);
+        pnlRegistroGenero.setLayout(pnlRegistroGeneroLayout);
+        pnlRegistroGeneroLayout.setHorizontalGroup(
+            pnlRegistroGeneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroGeneroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRegistroGeneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRegistroGenero)
+                    .addGroup(pnlRegistroGeneroLayout.createSequentialGroup()
+                        .addComponent(lblNombreGenero)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombreGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(317, Short.MAX_VALUE))
+        );
+        pnlRegistroGeneroLayout.setVerticalGroup(
+            pnlRegistroGeneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroGeneroLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(pnlRegistroGeneroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombreGenero)
+                    .addComponent(txtNombreGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegistroGenero)
+                .addContainerGap(286, Short.MAX_VALUE))
+        );
+
+        tbpPanel.addTab("Registro Género", pnlRegistroGenero);
+
+        pnlRegistroPlataforma.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblNombrePlataforma.setText("Nombre:");
+
+        lblCompaniaPlataforma.setText("Compañia:");
+
+        btnRegistrarPlataforma.setText("Aceptar");
+
+        javax.swing.GroupLayout pnlRegistroPlataformaLayout = new javax.swing.GroupLayout(pnlRegistroPlataforma);
+        pnlRegistroPlataforma.setLayout(pnlRegistroPlataformaLayout);
+        pnlRegistroPlataformaLayout.setHorizontalGroup(
+            pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroPlataformaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnRegistrarPlataforma)
+                    .addGroup(pnlRegistroPlataformaLayout.createSequentialGroup()
+                        .addComponent(lblNombrePlataforma)
+                        .addGap(29, 29, 29)
+                        .addComponent(txtNombrePlataforma, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlRegistroPlataformaLayout.createSequentialGroup()
+                        .addComponent(lblCompaniaPlataforma)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCompaniaPlataforma)))
+                .addContainerGap(288, Short.MAX_VALUE))
+        );
+        pnlRegistroPlataformaLayout.setVerticalGroup(
+            pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroPlataformaLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombrePlataforma)
+                    .addComponent(txtNombrePlataforma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCompaniaPlataforma)
+                    .addComponent(txtCompaniaPlataforma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegistrarPlataforma)
+                .addContainerGap(254, Short.MAX_VALUE))
+        );
+
+        tbpPanel.addTab("Registro Plataforma", pnlRegistroPlataforma);
+
+        pnlRegistroEngine.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblNombreEngine.setText("Nombre:");
+
+        lblCompaniaEngine.setText("Compañia:");
+
+        btnRegistrarEngine.setText("Aceptar");
+
+        javax.swing.GroupLayout pnlRegistroEngineLayout = new javax.swing.GroupLayout(pnlRegistroEngine);
+        pnlRegistroEngine.setLayout(pnlRegistroEngineLayout);
+        pnlRegistroEngineLayout.setHorizontalGroup(
+            pnlRegistroEngineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroEngineLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRegistroEngineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegistroEngineLayout.createSequentialGroup()
+                        .addComponent(lblNombreEngine)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtNombreEngine, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegistroEngineLayout.createSequentialGroup()
+                        .addComponent(lblCompaniaEngine)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCompaniaEngine, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegistrarEngine, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(310, Short.MAX_VALUE))
+        );
+        pnlRegistroEngineLayout.setVerticalGroup(
+            pnlRegistroEngineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroEngineLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(pnlRegistroEngineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombreEngine)
+                    .addComponent(txtNombreEngine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlRegistroEngineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCompaniaEngine)
+                    .addComponent(txtCompaniaEngine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegistrarEngine)
+                .addContainerGap(243, Short.MAX_VALUE))
+        );
+
+        tbpPanel.addTab("Registro Engine", pnlRegistroEngine);
+
+        pnlRegistroStaff.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblNombreStaff.setText("Nombre:");
+
+        btnRegistrarStaff.setText("Aceptar");
+
+        javax.swing.GroupLayout pnlRegistroStaffLayout = new javax.swing.GroupLayout(pnlRegistroStaff);
+        pnlRegistroStaff.setLayout(pnlRegistroStaffLayout);
+        pnlRegistroStaffLayout.setHorizontalGroup(
+            pnlRegistroStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroStaffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlRegistroStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRegistrarStaff)
+                    .addGroup(pnlRegistroStaffLayout.createSequentialGroup()
+                        .addComponent(lblNombreStaff)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtNombreStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(315, Short.MAX_VALUE))
+        );
+        pnlRegistroStaffLayout.setVerticalGroup(
+            pnlRegistroStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegistroStaffLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(pnlRegistroStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombreStaff)
+                    .addComponent(txtNombreStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegistrarStaff)
+                .addContainerGap(278, Short.MAX_VALUE))
+        );
+
+        tbpPanel.addTab("Registro Staff", pnlRegistroStaff);
+
+        menArchivo.setText("Archivo");
+
+        meiBorrar.setText("Borrar");
+        meiBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meiBorrarActionPerformed(evt);
+            }
+        });
+        menArchivo.add(meiBorrar);
+
+        meiEstadisticas.setText("Estadísticas");
+        meiEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meiEstadisticasActionPerformed(evt);
+            }
+        });
+        menArchivo.add(meiEstadisticas);
+
+        mebApp.add(menArchivo);
+
+        menAyuda.setText("Ayuda");
+
+        meiAcercaDe.setText("Acerca de...");
+        meiAcercaDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meiAcercaDeActionPerformed(evt);
+            }
+        });
+        menAyuda.add(meiAcercaDe);
+
+        mebApp.add(menAyuda);
+
+        setJMenuBar(mebApp);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,19 +581,39 @@ public class App extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tbpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(tbpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void meiBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meiBorrarActionPerformed
+        frameBorrar.setVisible(true);
+        frameBorrar.setBounds(550, 100, 300, 400);
+    }//GEN-LAST:event_meiBorrarActionPerformed
+
+    private void meiEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meiEstadisticasActionPerformed
+        frameEstadisticas.setVisible(true);
+        frameEstadisticas.setBounds(550, 100, 300, 400);
+    }//GEN-LAST:event_meiEstadisticasActionPerformed
+
+    private void meiAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meiAcercaDeActionPerformed
+        playSound();
+        String titVentana = "Información";
+        String vntMensaje = "Software Creado por Jorge Anjel - Javier Vergara - 16/08/2018.";
+
+        int tipoa = JOptionPane.INFORMATION_MESSAGE;
+
+        JOptionPane.showMessageDialog(this, vntMensaje, titVentana, tipoa);
+    }//GEN-LAST:event_meiAcercaDeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,23 +651,80 @@ public class App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JButton btnAceptarDespedirStaff;
+    private javax.swing.JButton btnAceptarRegistroJuego;
+    private javax.swing.JButton btnRegistrarEngine;
+    private javax.swing.JButton btnRegistrarPlataforma;
+    private javax.swing.JButton btnRegistrarStaff;
+    private javax.swing.JButton btnRegistroGenero;
+    private javax.swing.JComboBox<String> cboEngine;
+    private javax.swing.JComboBox<String> cboGenero;
+    private javax.swing.JComboBox<String> cboPlataforma;
+    private javax.swing.JFrame frameBorrar;
+    private javax.swing.JFrame frameEstadisticas;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblAnio;
+    private javax.swing.JLabel lblCompaniaEngine;
+    private javax.swing.JLabel lblCompaniaPlataforma;
+    private javax.swing.JLabel lblDespedirStaff;
+    private javax.swing.JLabel lblEngine;
+    private javax.swing.JLabel lblGenero;
+    private javax.swing.JLabel lblNombreEngine;
+    private javax.swing.JLabel lblNombreGenero;
+    private javax.swing.JLabel lblNombrePlataforma;
+    private javax.swing.JLabel lblNombreStaff;
+    private javax.swing.JLabel lblPlataforma;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblUnidadesVendidas;
+    private javax.swing.JLabel lblVersionJuego;
+    private javax.swing.JMenuBar mebApp;
+    private javax.swing.JMenuItem meiAcercaDe;
+    private javax.swing.JMenuItem meiBorrar;
+    private javax.swing.JMenuItem meiEstadisticas;
+    private javax.swing.JMenu menArchivo;
+    private javax.swing.JMenu menAyuda;
+    private javax.swing.JPanel pnlBorrarStaff;
+    private javax.swing.JPanel pnlRegistroEngine;
+    private javax.swing.JPanel pnlRegistroGenero;
+    private javax.swing.JPanel pnlRegistroJuego;
+    private javax.swing.JPanel pnlRegistroPlataforma;
+    private javax.swing.JPanel pnlRegistroStaff;
+    private javax.swing.JPanel pnlVerJuegos;
+    private javax.swing.JPanel pnlVerJuegosPorAnio;
+    private javax.swing.JPanel pnlVerStaff;
+    private javax.swing.JPanel pnlVerStaffDespedido;
+    private javax.swing.JTable tabJuegos;
+    private javax.swing.JTable tabJuegosPorAño;
+    private javax.swing.JTable tabStaff;
+    private javax.swing.JTable tabStaffDespedido;
+    private javax.swing.JTabbedPane tbpPanel;
+    private javax.swing.JTabbedPane tpEstadisticas;
+    private javax.swing.JTextField txtAnio;
+    private javax.swing.JTextField txtCompaniaEngine;
+    private javax.swing.JTextField txtCompaniaPlataforma;
+    private javax.swing.JTextField txtNombreEngine;
+    private javax.swing.JTextField txtNombreGenero;
+    private javax.swing.JTextField txtNombrePlataforma;
+    private javax.swing.JTextField txtNombreStaff;
+    private javax.swing.JTextField txtNombreStaffDespedido;
+    private javax.swing.JTextField txtTitulo;
+    private javax.swing.JTextField txtUnidadesVendidas;
+    private javax.swing.JTextField txtVersion;
     // End of variables declaration//GEN-END:variables
+
+    public void playSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src\\cl\\mochasoft\\res\\Unused Song 2.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Hay un error con el sonido, contacte a janjell.");
+            ex.printStackTrace();
+        }
+    }
+
 }

@@ -115,7 +115,7 @@ BEGIN
 END;
 GO
 
-CREATE PROCEDURE elminarStaff (@idStaff UNIQUEIDENTIFIER)
+CREATE PROCEDURE eliminarStaff (@idStaff UNIQUEIDENTIFIER)
 AS
 BEGIN
 	DELETE FROM juego_staff WHERE fk_staff = @idStaff;
