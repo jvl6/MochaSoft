@@ -151,3 +151,49 @@ BEGIN
 	INSERT INTO staff_despedido VALUES(NEWID(),@nombre)
 END
 GO
+
+CREATE PROCEDURE informe_desarrollador_top (@anio DATE) AS
+BEGIN
+	DECLARE @idStaff UNIQUEIDENTIFIER;
+	DECLARE @nombreStaff VARCHAR(200);
+	DECLARE @idJuego UNIQUEIDENTIFIER;
+	DECLARE @anio_release DATE;
+	DECLARE @max INT;
+
+	DECLARE cursor_staff CURSOR FOR
+		SELECT staff.id, staff.nombre, juego.id, juego.anio_release 
+		FROM juego_staff
+		JOIN staff ON juego_staff.fk_juego = staff.id
+		JOIN juego ON juego_staff.fk_juego = juego.id
+		WHERE juego.anio_release = @anio;
+
+	OPEN cursor_staff;
+
+	FETCH NEXT FROM cursor_staff INTO @idStaff, @nombreStaff, @idJuego, @anio_release;
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		IF @max IS NULL
+		BEGIN
+			SET @max = (SELECT COUNT(*) FROM juego_staff WHERE fk_juego = @idJuego AND fk_staff = @idStaff);
+		END;
+
+		ELSE
+		BEGIN
+			DECLARE @actual INT = (SELECT COUNT(*) FROM juego_staff WHERE fk_juego = @idJuego AND fk_staff = @idStaff);
+
+			IF @actual > @max
+			BEGIN
+				SET @max = (SELECT COUNT(*) FROM juego_staff WHERE fk_juego = @idJuego AND fk_staff = @idStaff);
+			END;
+		END
+
+		FETCH NEXT FROM cursor_staff INTO @idStaff, @nombreStaff, @idJuego, @anio_release;
+	END;
+
+	CLOSE cursor_staff;
+	DEALLOCATE cursor_staff;
+	
+	PRINT 'Nombre: ' + @nombreStaff;
+	PRINT 'Cantidad de Juegos: ' + @max;
+END;
