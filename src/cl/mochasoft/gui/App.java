@@ -1,6 +1,17 @@
 package cl.mochasoft.gui;
 
+import cl.mochasoft.model.Data;
+import cl.mochasoft.model.Juego;
+import cl.mochasoft.model.Staff;
+import cl.mochasoft.model.StaffDespedido;
+import cl.mochasoft.model.TMJuegos;
+import cl.mochasoft.model.TMStaff;
+import cl.mochasoft.model.TMStaffDespedido;
 import java.io.File;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -12,11 +23,20 @@ import javax.swing.JOptionPane;
  */
 public class App extends javax.swing.JFrame {
 
-    /**
-     * Creates new form App
-     */
+    Data dat;
+
     public App() {
+        try {
+            dat = new Data();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("MochaSoft v0.1b - Versión Beta");
     }
 
     /**
@@ -39,8 +59,11 @@ public class App extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabJuegos = new javax.swing.JTable();
         pnlVerJuegosPorAnio = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabJuegosPorAño = new javax.swing.JTable();
+        lblJuegosPorAnio = new javax.swing.JLabel();
+        txtVerJuegosPorAnio = new javax.swing.JTextField();
+        btnVerJuegosPorAnio = new javax.swing.JButton();
+        lblResultadosPorAnio = new javax.swing.JLabel();
+        txtVerResultadosJuegosAnio = new javax.swing.JTextField();
         pnlVerStaff = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabStaff = new javax.swing.JTable();
@@ -170,34 +193,51 @@ public class App extends javax.swing.JFrame {
 
         tpEstadisticas.addTab("Ver Juegos", pnlVerJuegos);
 
-        tabJuegosPorAño.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        lblJuegosPorAnio.setText("Ingrese Año:");
+
+        btnVerJuegosPorAnio.setText("Aceptar");
+        btnVerJuegosPorAnio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerJuegosPorAnioActionPerformed(evt);
             }
-        ));
-        jScrollPane2.setViewportView(tabJuegosPorAño);
+        });
+
+        lblResultadosPorAnio.setText("Resultados:");
+
+        txtVerResultadosJuegosAnio.setEditable(false);
 
         javax.swing.GroupLayout pnlVerJuegosPorAnioLayout = new javax.swing.GroupLayout(pnlVerJuegosPorAnio);
         pnlVerJuegosPorAnio.setLayout(pnlVerJuegosPorAnioLayout);
         pnlVerJuegosPorAnioLayout.setHorizontalGroup(
             pnlVerJuegosPorAnioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlVerJuegosPorAnioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(91, 91, 91)
+                .addGroup(pnlVerJuegosPorAnioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlVerJuegosPorAnioLayout.createSequentialGroup()
+                        .addComponent(lblJuegosPorAnio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtVerJuegosPorAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlVerJuegosPorAnioLayout.createSequentialGroup()
+                        .addComponent(lblResultadosPorAnio)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtVerResultadosJuegosAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(btnVerJuegosPorAnio)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         pnlVerJuegosPorAnioLayout.setVerticalGroup(
             pnlVerJuegosPorAnioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlVerJuegosPorAnioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVerJuegosPorAnioLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(pnlVerJuegosPorAnioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblJuegosPorAnio)
+                    .addComponent(txtVerJuegosPorAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerJuegosPorAnio))
+                .addGap(24, 24, 24)
+                .addGroup(pnlVerJuegosPorAnioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtVerResultadosJuegosAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblResultadosPorAnio))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         tpEstadisticas.addTab("Ver Juegos por Año", pnlVerJuegosPorAnio);
@@ -597,12 +637,19 @@ public class App extends javax.swing.JFrame {
 
     private void meiBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meiBorrarActionPerformed
         frameBorrar.setVisible(true);
-        frameBorrar.setBounds(550, 100, 300, 400);
+        frameBorrar.setBounds(550, 100, 500, 500);
+        frameBorrar.setLocationRelativeTo(null);
+        frameBorrar.setTitle("Borrar");
     }//GEN-LAST:event_meiBorrarActionPerformed
 
     private void meiEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meiEstadisticasActionPerformed
         frameEstadisticas.setVisible(true);
-        frameEstadisticas.setBounds(550, 100, 300, 400);
+        frameEstadisticas.setBounds(550, 100, 500, 500);
+        frameEstadisticas.setLocationRelativeTo(null);
+        frameEstadisticas.setTitle("Estadísticas");
+        cargarTblJuegos();
+        cargarTblStaff();
+        cargarTblStaffDespedido();
     }//GEN-LAST:event_meiEstadisticasActionPerformed
 
     private void meiAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meiAcercaDeActionPerformed
@@ -614,6 +661,19 @@ public class App extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, vntMensaje, titVentana, tipoa);
     }//GEN-LAST:event_meiAcercaDeActionPerformed
+
+    private void btnVerJuegosPorAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerJuegosPorAnioActionPerformed
+
+        String anio = txtVerJuegosPorAnio.getText();
+
+        try {
+            int reslut = dat.getCantJuego(anio);
+            txtVerResultadosJuegosAnio.setText(Integer.toString(reslut));
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnVerJuegosPorAnioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -657,13 +717,13 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrarPlataforma;
     private javax.swing.JButton btnRegistrarStaff;
     private javax.swing.JButton btnRegistroGenero;
+    private javax.swing.JButton btnVerJuegosPorAnio;
     private javax.swing.JComboBox<String> cboEngine;
     private javax.swing.JComboBox<String> cboGenero;
     private javax.swing.JComboBox<String> cboPlataforma;
     private javax.swing.JFrame frameBorrar;
     private javax.swing.JFrame frameEstadisticas;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblAnio;
@@ -672,11 +732,13 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel lblDespedirStaff;
     private javax.swing.JLabel lblEngine;
     private javax.swing.JLabel lblGenero;
+    private javax.swing.JLabel lblJuegosPorAnio;
     private javax.swing.JLabel lblNombreEngine;
     private javax.swing.JLabel lblNombreGenero;
     private javax.swing.JLabel lblNombrePlataforma;
     private javax.swing.JLabel lblNombreStaff;
     private javax.swing.JLabel lblPlataforma;
+    private javax.swing.JLabel lblResultadosPorAnio;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUnidadesVendidas;
     private javax.swing.JLabel lblVersionJuego;
@@ -697,7 +759,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel pnlVerStaff;
     private javax.swing.JPanel pnlVerStaffDespedido;
     private javax.swing.JTable tabJuegos;
-    private javax.swing.JTable tabJuegosPorAño;
     private javax.swing.JTable tabStaff;
     private javax.swing.JTable tabStaffDespedido;
     private javax.swing.JTabbedPane tbpPanel;
@@ -712,6 +773,8 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreStaffDespedido;
     private javax.swing.JTextField txtTitulo;
     private javax.swing.JTextField txtUnidadesVendidas;
+    private javax.swing.JTextField txtVerJuegosPorAnio;
+    private javax.swing.JTextField txtVerResultadosJuegosAnio;
     private javax.swing.JTextField txtVersion;
     // End of variables declaration//GEN-END:variables
 
@@ -727,4 +790,36 @@ public class App extends javax.swing.JFrame {
         }
     }
 
+    private void cargarTblJuegos() {
+        try {
+            List<Juego> col = dat.viewJuegos();
+            TMJuegos model = new TMJuegos(col);
+            tabJuegos.setModel(model);
+            System.out.println("Se carga tabla");
+        } catch (SQLException ex) {
+            System.out.println("Error:" + ex);
+        }
+    }
+
+    private void cargarTblStaff() {
+        try {
+            List<Staff> col = dat.viewStaff();
+            TMStaff model = new TMStaff(col);
+            tabStaff.setModel(model);
+            System.out.println("Se carga tabla");
+        } catch (SQLException ex) {
+            System.out.println("Error:" + ex);
+        }
+    }
+
+    private void cargarTblStaffDespedido() {
+        try {
+            List<StaffDespedido> col = dat.viewStaffDespedido();
+            TMStaffDespedido model = new TMStaffDespedido(col);
+            tabStaffDespedido.setModel(model);
+            System.out.println("Se carga tabla");
+        } catch (SQLException ex) {
+            System.out.println("Error:" + ex);
+        }
+    }
 }

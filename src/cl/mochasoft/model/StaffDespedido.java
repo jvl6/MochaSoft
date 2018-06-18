@@ -4,17 +4,17 @@ package cl.mochasoft.model;
  *
  * @author Jorge A
  */
-public class Staff {
+public class StaffDespedido {
 
     private String id;
     private String nombre;
 
-    public Staff(String id, String nombre) {
+    public StaffDespedido(String id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    public Staff() {
+    public StaffDespedido() {
     }
 
     public String getId() {
