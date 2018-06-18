@@ -232,3 +232,4 @@ GO
 
 SELECT * FROM genero;
 SELECT * FROM juego;
+SELECT * FROM juego_staff;

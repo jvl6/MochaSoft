@@ -1,6 +1,5 @@
 package cl.mochasoft.model;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -247,6 +246,25 @@ public class Data {
 
         con.close();
         return top;
+    }
+
+    public Staff encontrarStaff(String nombre) throws SQLException {
+        query = "SELECT * FROM staff WHERE nombre = '" + nombre + "';";
+        rs = con.ejecutarSelect(query);
+        Staff per = null;
+        while (rs.next()) {
+            per = new Staff();
+            per.setId(rs.getString(1));
+            per.setNombre(rs.getString(2));
+        }
+        con.close();
+        return per;
+    }
+
+    public void vincularStaff(String staff, String juego, String rol) throws SQLException {
+        query = "EXEC vincularJuegoStaff '" + staff + "','" + juego + "','" + rol + "';";
+        con.ejecutar(query);
+        con.close();
     }
 
 }
