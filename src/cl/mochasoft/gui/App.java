@@ -2,6 +2,7 @@ package cl.mochasoft.gui;
 
 import cl.mochasoft.model.CompaniaEngine;
 import cl.mochasoft.model.CompaniaPlataforma;
+import cl.mochasoft.model.CursorTopStaff;
 import cl.mochasoft.model.Data;
 import cl.mochasoft.model.Engine;
 import cl.mochasoft.model.Genero;
@@ -12,6 +13,7 @@ import cl.mochasoft.model.StaffDespedido;
 import cl.mochasoft.model.TMJuegos;
 import cl.mochasoft.model.TMStaff;
 import cl.mochasoft.model.TMStaffDespedido;
+import cl.mochasoft.model.TMTopStaff;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
@@ -27,9 +29,9 @@ import javax.swing.JOptionPane;
  * @author Jorge A
  */
 public class App extends javax.swing.JFrame {
-
+    
     Data dat;
-
+    
     public App() {
         try {
             dat = new Data();
@@ -38,7 +40,7 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-             
+        
         initComponents();
         setLocationRelativeTo(null);
         setTitle("MochaSoft v0.1b - Versión Beta");
@@ -49,7 +51,7 @@ public class App extends javax.swing.JFrame {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private void loadCboJuego() throws SQLException {
         cboEngine.removeAllItems();
         List<Engine> en = dat.viewEngine();
@@ -101,6 +103,12 @@ public class App extends javax.swing.JFrame {
         pnlVerStaffDespedido = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabStaffDespedido = new javax.swing.JTable();
+        pblVerStaffTop = new javax.swing.JPanel();
+        lblAnioStaffTop = new javax.swing.JLabel();
+        txtAnioStaffTop = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabMostrarTopStaff = new javax.swing.JTable();
+        btnAceptarAnioTopStaff = new javax.swing.JButton();
         tbpPanel = new javax.swing.JTabbedPane();
         pnlRegistroJuego = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
@@ -154,6 +162,11 @@ public class App extends javax.swing.JFrame {
         lblDespedirStaff.setText("Nombre:");
 
         btnAceptarDespedirStaff.setText("Aceptar");
+        btnAceptarDespedirStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarDespedirStaffActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBorrarStaffLayout = new javax.swing.GroupLayout(pnlBorrarStaff);
         pnlBorrarStaff.setLayout(pnlBorrarStaffLayout);
@@ -215,7 +228,7 @@ public class App extends javax.swing.JFrame {
             pnlVerJuegosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlVerJuegosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlVerJuegosLayout.setVerticalGroup(
@@ -258,7 +271,7 @@ public class App extends javax.swing.JFrame {
                         .addComponent(txtVerResultadosJuegosAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(btnVerJuegosPorAnio)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         pnlVerJuegosPorAnioLayout.setVerticalGroup(
             pnlVerJuegosPorAnioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,7 +309,7 @@ public class App extends javax.swing.JFrame {
             pnlVerStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlVerStaffLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlVerStaffLayout.setVerticalGroup(
@@ -328,7 +341,7 @@ public class App extends javax.swing.JFrame {
             pnlVerStaffDespedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlVerStaffDespedidoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlVerStaffDespedidoLayout.setVerticalGroup(
@@ -340,6 +353,60 @@ public class App extends javax.swing.JFrame {
         );
 
         tpEstadisticas.addTab("Ver Staff Despedido", pnlVerStaffDespedido);
+
+        lblAnioStaffTop.setText("Ingrese Año:");
+
+        tabMostrarTopStaff.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabMostrarTopStaff);
+
+        btnAceptarAnioTopStaff.setText("Aceptar");
+        btnAceptarAnioTopStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarAnioTopStaffActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pblVerStaffTopLayout = new javax.swing.GroupLayout(pblVerStaffTop);
+        pblVerStaffTop.setLayout(pblVerStaffTopLayout);
+        pblVerStaffTopLayout.setHorizontalGroup(
+            pblVerStaffTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pblVerStaffTopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pblVerStaffTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                    .addGroup(pblVerStaffTopLayout.createSequentialGroup()
+                        .addComponent(lblAnioStaffTop)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtAnioStaffTop, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAceptarAnioTopStaff)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pblVerStaffTopLayout.setVerticalGroup(
+            pblVerStaffTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pblVerStaffTopLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(pblVerStaffTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAnioStaffTop)
+                    .addComponent(txtAnioStaffTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAceptarAnioTopStaff))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tpEstadisticas.addTab("Ver Staff Top", pblVerStaffTop);
 
         javax.swing.GroupLayout frameEstadisticasLayout = new javax.swing.GroupLayout(frameEstadisticas.getContentPane());
         frameEstadisticas.getContentPane().setLayout(frameEstadisticasLayout);
@@ -745,22 +812,23 @@ public class App extends javax.swing.JFrame {
         cargarTblJuegos();
         cargarTblStaff();
         cargarTblStaffDespedido();
+        tabMostrarTopStaff.setVisible(false);
     }//GEN-LAST:event_meiEstadisticasActionPerformed
 
     private void meiAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meiAcercaDeActionPerformed
         playSound();
         String titVentana = "Información";
         String vntMensaje = "Software Creado por Jorge Anjel - Javier Vergara - 16/08/2018.";
-
+        
         int tipoa = JOptionPane.INFORMATION_MESSAGE;
-
+        
         JOptionPane.showMessageDialog(this, vntMensaje, titVentana, tipoa);
     }//GEN-LAST:event_meiAcercaDeActionPerformed
 
     private void btnVerJuegosPorAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerJuegosPorAnioActionPerformed
-
+        
         String anio = txtVerJuegosPorAnio.getText();
-
+        
         try {
             int reslut = dat.getCantJuego(anio);
             txtVerResultadosJuegosAnio.setText(Integer.toString(reslut));
@@ -777,7 +845,7 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         txtNombreGenero.setText(null);
         txtNombreGenero.requestFocus();
     }//GEN-LAST:event_btnRegistroGeneroActionPerformed
@@ -799,7 +867,7 @@ public class App extends javax.swing.JFrame {
     private void btnBuscarCompEnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCompEnActionPerformed
         try {
             CompaniaEngine comp = dat.encontrarCompaniaEngine(txtCompaniaEngine.getText());
-
+            
             if (comp != null) {
                 txtCompaniaEngine.setText(comp.getNombre());
                 lblEngineEncontrado.setText("Compañía encontrada.");
@@ -814,13 +882,13 @@ public class App extends javax.swing.JFrame {
     private void btnRegistrarPlataformaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPlataformaActionPerformed
         String plataforma = txtNombrePlataforma.getText();
         String comp = txtCompaniaPlataforma.getText();
-
+        
         try {
             dat.createPlataforma(plataforma, comp);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         txtNombrePlataforma.setText(null);
         txtCompaniaPlataforma.setText(null);
         txtNombrePlataforma.requestFocus();
@@ -829,13 +897,13 @@ public class App extends javax.swing.JFrame {
     private void btnRegistrarEngineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEngineActionPerformed
         String engin = txtNombreEngine.getText();
         String comp = txtCompaniaEngine.getText();
-
+        
         try {
             dat.createEngine(engin, comp);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         txtNombreEngine.setText(null);
         txtCompaniaEngine.setText(null);
         txtNombreEngine.requestFocus();
@@ -848,7 +916,7 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         txtNombreStaff.setText(null);
         txtNombreStaff.requestFocus();
     }//GEN-LAST:event_btnRegistrarStaffActionPerformed
@@ -861,7 +929,7 @@ public class App extends javax.swing.JFrame {
         String engine = (String) cboEngine.getSelectedItem();
         String unidades = String.valueOf(spnUnidades.getValue());
         String version = txtVersion.getText();
-
+        
         try {
             dat.createJuego(titulo, genero, anio, plataforma, engine, unidades, version);
         } catch (SQLException ex) {
@@ -877,6 +945,39 @@ public class App extends javax.swing.JFrame {
         txtVersion.setText(null);
         txtTitulo.requestFocus();
     }//GEN-LAST:event_btnAceptarRegistroJuegoActionPerformed
+
+    private void btnAceptarDespedirStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarDespedirStaffActionPerformed
+        
+        String nombre = txtNombreStaffDespedido.getText();
+        
+        try {
+            if (nombre.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Nombre Vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+                txtNombreStaffDespedido.requestFocus();
+            } else if (dat.existeStaff(nombre) == 0) {
+                JOptionPane.showMessageDialog(null, "El Nombre Ingresado no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                txtNombreStaffDespedido.requestFocus();
+            } else {
+                String nstaff = dat.getStaffId(nombre).toString();
+                dat.deleteStaff(nstaff);
+                JOptionPane.showMessageDialog(null, "El Staff ha sido despedido.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex);
+        }
+
+    }//GEN-LAST:event_btnAceptarDespedirStaffActionPerformed
+
+    private void btnAceptarAnioTopStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarAnioTopStaffActionPerformed
+        
+        String anio = txtAnioStaffTop.getText();
+        
+        tabMostrarTopStaff.setVisible(true);
+        
+        cargarTblTopStaff(anio);
+
+    }//GEN-LAST:event_btnAceptarAnioTopStaffActionPerformed
 
     /**
      * @param args the command line arguments
@@ -914,6 +1015,7 @@ public class App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptarAnioTopStaff;
     private javax.swing.JButton btnAceptarDespedirStaff;
     private javax.swing.JButton btnAceptarRegistroJuego;
     private javax.swing.JButton btnBuscarCompEn;
@@ -929,9 +1031,11 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JFrame frameBorrar;
     private javax.swing.JFrame frameEstadisticas;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblAnio;
+    private javax.swing.JLabel lblAnioStaffTop;
     private javax.swing.JLabel lblCompaniaEngine;
     private javax.swing.JLabel lblCompaniaPlataforma;
     private javax.swing.JLabel lblDespedirStaff;
@@ -955,6 +1059,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JMenuItem meiEstadisticas;
     private javax.swing.JMenu menArchivo;
     private javax.swing.JMenu menAyuda;
+    private javax.swing.JPanel pblVerStaffTop;
     private javax.swing.JPanel pnlBorrarStaff;
     private javax.swing.JPanel pnlRegistroEngine;
     private javax.swing.JPanel pnlRegistroGenero;
@@ -967,11 +1072,13 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel pnlVerStaffDespedido;
     private javax.swing.JSpinner spnUnidades;
     private javax.swing.JTable tabJuegos;
+    private javax.swing.JTable tabMostrarTopStaff;
     private javax.swing.JTable tabStaff;
     private javax.swing.JTable tabStaffDespedido;
     private javax.swing.JTabbedPane tbpPanel;
     private javax.swing.JTabbedPane tpEstadisticas;
     private javax.swing.JTextField txtAnio;
+    private javax.swing.JTextField txtAnioStaffTop;
     private javax.swing.JTextField txtCompaniaEngine;
     private javax.swing.JTextField txtCompaniaPlataforma;
     private javax.swing.JTextField txtNombreEngine;
@@ -996,37 +1103,49 @@ public class App extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-
+    
     private void cargarTblJuegos() {
         try {
             List<Juego> col = dat.viewJuegos();
             TMJuegos model = new TMJuegos(col);
             tabJuegos.setModel(model);
-            System.out.println("Se carga tabla");
+            System.out.println("Se carga tabla juegos");
         } catch (SQLException ex) {
             System.out.println("Error:" + ex);
         }
     }
-
+    
     private void cargarTblStaff() {
         try {
             List<Staff> col = dat.viewStaff();
             TMStaff model = new TMStaff(col);
             tabStaff.setModel(model);
-            System.out.println("Se carga tabla");
+            System.out.println("Se carga tabla staff");
         } catch (SQLException ex) {
             System.out.println("Error:" + ex);
         }
     }
-
+    
     private void cargarTblStaffDespedido() {
         try {
             List<StaffDespedido> col = dat.viewStaffDespedido();
             TMStaffDespedido model = new TMStaffDespedido(col);
             tabStaffDespedido.setModel(model);
-            System.out.println("Se carga tabla");
+            System.out.println("Se carga tabla despidos");
         } catch (SQLException ex) {
             System.out.println("Error:" + ex);
         }
     }
+    
+    private void cargarTblTopStaff(String anio) {
+        try {
+            List<CursorTopStaff> col = dat.viewTopStaff(anio);
+            TMTopStaff model = new TMTopStaff(col);
+            tabMostrarTopStaff.setModel(model);
+            System.out.println("Se carga tabla top staff");
+        } catch (SQLException ex) {
+            System.out.println("Error:" + ex);
+        }
+    }
+    
 }
