@@ -1,5 +1,6 @@
 package cl.mochasoft.model;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -88,6 +89,57 @@ public class Data {
 
         con.close();
         return resultado;
+    }
+    
+    public List<Genero> viewGenero() throws SQLException {
+        query = "SELECT * FROM genero;";
+        List<Genero> gen = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        Genero g;
+        
+        while (rs.next()) {            
+            g = new Genero();
+            g.setId(rs.getString(1));
+            g.setNombre(rs.getString(2));
+            gen.add(g);
+        }
+        
+        con.close();
+        return gen;
+    }
+    
+    public List<Plataforma> viewPlataforma() throws SQLException {
+        query = "SELECT * FROM plataforma;";
+        List<Plataforma> plat = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        Plataforma p;
+        
+        while (rs.next()) {            
+            p = new Plataforma();
+            p.setId(rs.getString(1));
+            p.setNombre(rs.getString(2));
+            plat.add(p);
+        }
+        
+        con.close();
+        return plat;
+    }
+    
+    public List<Engine> viewEngine() throws SQLException {
+        query = "SELECT * FROM engine;";
+        List<Engine> en = new ArrayList<>();
+        rs = con.ejecutarSelect(query);
+        Engine e;
+        
+        while (rs.next()) {
+            e = new Engine();
+            e.setId(rs.getString(1));
+            e.setNombre(rs.getString(2));
+            en.add(e);
+        }
+        
+        con.close();
+        return en;
     }
 
     public List<Staff> viewStaff() throws SQLException {

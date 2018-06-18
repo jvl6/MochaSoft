@@ -3,7 +3,10 @@ package cl.mochasoft.gui;
 import cl.mochasoft.model.CompaniaEngine;
 import cl.mochasoft.model.CompaniaPlataforma;
 import cl.mochasoft.model.Data;
+import cl.mochasoft.model.Engine;
+import cl.mochasoft.model.Genero;
 import cl.mochasoft.model.Juego;
+import cl.mochasoft.model.Plataforma;
 import cl.mochasoft.model.Staff;
 import cl.mochasoft.model.StaffDespedido;
 import cl.mochasoft.model.TMJuegos;
@@ -35,10 +38,36 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+             
         initComponents();
         setLocationRelativeTo(null);
         setTitle("MochaSoft v0.1b - Versión Beta");
+        
+        try {
+            loadCboJuego();
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void loadCboJuego() throws SQLException {
+        cboEngine.removeAllItems();
+        List<Engine> en = dat.viewEngine();
+        for (Engine e : en) {
+            cboEngine.addItem(e.getNombre());
+        }
+        
+        cboGenero.removeAllItems();
+        List<Genero> gen = dat.viewGenero();
+        for (Genero g : gen) {
+            cboGenero.addItem(g.getNombre());
+        }
+        
+        cboPlataforma.removeAllItems();
+        List<Plataforma> plat = dat.viewPlataforma();
+        for (Plataforma p : plat) {
+            cboPlataforma.addItem(p.getNombre());
+        }
     }
 
     /**
@@ -85,10 +114,10 @@ public class App extends javax.swing.JFrame {
         txtAnio = new javax.swing.JTextField();
         txtVersion = new javax.swing.JTextField();
         btnAceptarRegistroJuego = new javax.swing.JButton();
-        cboGenero = new javax.swing.JComboBox<>();
         cboPlataforma = new javax.swing.JComboBox<>();
         cboEngine = new javax.swing.JComboBox<>();
         spnUnidades = new javax.swing.JSpinner();
+        cboGenero = new javax.swing.JComboBox<>();
         pnlRegistroGenero = new javax.swing.JPanel();
         lblNombreGenero = new javax.swing.JLabel();
         txtNombreGenero = new javax.swing.JTextField();
@@ -354,8 +383,6 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        cboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         cboPlataforma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cboEngine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -377,9 +404,9 @@ public class App extends javax.swing.JFrame {
                             .addComponent(lblAnio))
                         .addGap(73, 73, 73)
                         .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboGenero, javax.swing.GroupLayout.Alignment.TRAILING, 0, 405, Short.MAX_VALUE)
                             .addComponent(txtAnio)
-                            .addComponent(txtTitulo)))
+                            .addComponent(txtTitulo)
+                            .addComponent(cboGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlRegistroJuegoLayout.createSequentialGroup()
                         .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPlataforma)
@@ -750,7 +777,7 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         txtNombreGenero.setText(null);
         txtNombreGenero.requestFocus();
     }//GEN-LAST:event_btnRegistroGeneroActionPerformed
@@ -772,7 +799,7 @@ public class App extends javax.swing.JFrame {
     private void btnBuscarCompEnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCompEnActionPerformed
         try {
             CompaniaEngine comp = dat.encontrarCompaniaEngine(txtCompaniaEngine.getText());
-            
+
             if (comp != null) {
                 txtCompaniaEngine.setText(comp.getNombre());
                 lblEngineEncontrado.setText("Compañía encontrada.");
@@ -787,13 +814,13 @@ public class App extends javax.swing.JFrame {
     private void btnRegistrarPlataformaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPlataformaActionPerformed
         String plataforma = txtNombrePlataforma.getText();
         String comp = txtCompaniaPlataforma.getText();
-        
+
         try {
             dat.createPlataforma(plataforma, comp);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         txtNombrePlataforma.setText(null);
         txtCompaniaPlataforma.setText(null);
         txtNombrePlataforma.requestFocus();
@@ -802,13 +829,13 @@ public class App extends javax.swing.JFrame {
     private void btnRegistrarEngineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEngineActionPerformed
         String engin = txtNombreEngine.getText();
         String comp = txtCompaniaEngine.getText();
-        
+
         try {
             dat.createEngine(engin, comp);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         txtNombreEngine.setText(null);
         txtCompaniaEngine.setText(null);
         txtNombreEngine.requestFocus();
@@ -821,7 +848,7 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         txtNombreStaff.setText(null);
         txtNombreStaff.requestFocus();
     }//GEN-LAST:event_btnRegistrarStaffActionPerformed
@@ -832,10 +859,23 @@ public class App extends javax.swing.JFrame {
         String anio = txtAnio.getText();
         String plataforma = (String) cboPlataforma.getSelectedItem();
         String engine = (String) cboEngine.getSelectedItem();
-        String unidades = (String) spnUnidades.getValue();
+        String unidades = String.valueOf(spnUnidades.getValue());
         String version = txtVersion.getText();
+
+        try {
+            dat.createJuego(titulo, genero, anio, plataforma, engine, unidades, version);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        
+        txtTitulo.setText(null);
+        cboGenero.setSelectedIndex(0);
+        txtAnio.setText(null);
+        cboPlataforma.setSelectedIndex(0);
+        cboEngine.setSelectedIndex(0);
+        spnUnidades.setValue(0);
+        txtVersion.setText(null);
+        txtTitulo.requestFocus();
     }//GEN-LAST:event_btnAceptarRegistroJuegoActionPerformed
 
     /**

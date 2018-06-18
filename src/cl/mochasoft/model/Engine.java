@@ -10,6 +10,9 @@ public class Engine {
     private String nombre;
     private int fk_compania;
 
+    public Engine() {
+    }
+
     public Engine(String id, String nombre, int fk_compania) {
         this.id = id;
         this.nombre = nombre;

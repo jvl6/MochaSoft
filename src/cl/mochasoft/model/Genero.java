@@ -6,19 +6,22 @@ package cl.mochasoft.model;
  */
 public class Genero {
 
-    private int id;
+    private String id;
     private String nombre;
 
-    public Genero(int id, String nombre) {
+    public Genero() {
+    }
+
+    public Genero(String id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

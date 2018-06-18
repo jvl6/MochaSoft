@@ -209,8 +209,8 @@ GO
 CREATE PROCEDURE crearJuego(@titulo VARCHAR(200), @genero VARCHAR(200), @anio DATE, @plataforma VARCHAR(200), @engine VARCHAR(200), @unidades BIGINT, @version FLOAT) AS
 BEGIN
 	DECLARE @idGenero UNIQUEIDENTIFIER = (SELECT id FROM genero WHERE nombre = @genero);
-	DECLARE @idPlataforma UNIQUEIDENTIFIER = (SELECT id FROM plataforma WHERE nombre = @genero);
-	DECLARE @idEngine UNIQUEIDENTIFIER = (SELECT id FROM engine WHERE nombre = @genero);
+	DECLARE @idPlataforma UNIQUEIDENTIFIER = (SELECT id FROM plataforma WHERE nombre = @plataforma);
+	DECLARE @idEngine UNIQUEIDENTIFIER = (SELECT id FROM engine WHERE nombre = @engine);
 
 	INSERT INTO juego VALUES (NEWID(), @titulo, @idGenero, @anio, @idPlataforma, @idEngine, @unidades, @version);
 END; -- DROP PROCEDURE crearJuego;
@@ -229,3 +229,6 @@ INSERT INTO juego_staff VALUES (NEWID(), '5C2AA1EA-804E-4B78-AD86-71570557B640',
 SELECT * FROM juego_staff;
 GO
 */
+
+SELECT * FROM genero;
+SELECT * FROM juego;
