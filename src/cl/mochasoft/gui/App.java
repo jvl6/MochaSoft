@@ -771,7 +771,7 @@ public class App extends javax.swing.JFrame {
 
     private void btnBuscarCompEnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCompEnActionPerformed
         try {
-            CompaniaEngine comp = dat.encontrarCompaniaEngine(txtNombreEngine.getText());
+            CompaniaEngine comp = dat.encontrarCompaniaEngine(txtCompaniaEngine.getText());
             
             if (comp != null) {
                 txtCompaniaEngine.setText(comp.getNombre());

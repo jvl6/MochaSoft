@@ -6,24 +6,24 @@ package cl.mochasoft.model;
  */
 public class Plataforma {
 
-    private int id;
+    private String id;
     private String nombre;
     private int fk_compania;
 
     public Plataforma() {
     }
 
-    public Plataforma(int id, String nombre, int fk_compania) {
+    public Plataforma(String id, String nombre, int fk_compania) {
         this.id = id;
         this.nombre = nombre;
         this.fk_compania = fk_compania;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

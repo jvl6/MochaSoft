@@ -129,7 +129,7 @@ public class Data {
         CompaniaPlataforma comp = null;
         while (rs.next()) {
             comp = new CompaniaPlataforma();
-            comp.setId(rs.getInt(1));
+            comp.setId(rs.getString(1));
             comp.setNombre(rs.getString(2));
         }
 
@@ -144,7 +144,7 @@ public class Data {
         CompaniaEngine comp = null;
         while (rs.next()) {
             comp = new CompaniaEngine();
-            comp.setId(rs.getInt(1));
+            comp.setId(rs.getString(1));
             comp.setNombre(rs.getString(2));
         }
 
