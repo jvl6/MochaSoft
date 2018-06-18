@@ -750,6 +750,9 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        txtNombreGenero.setText(null);
+        txtNombreGenero.requestFocus();
     }//GEN-LAST:event_btnRegistroGeneroActionPerformed
 
     private void btnBuscarCompPlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCompPlatActionPerformed
@@ -790,6 +793,10 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        txtNombrePlataforma.setText(null);
+        txtCompaniaPlataforma.setText(null);
+        txtNombrePlataforma.requestFocus();
     }//GEN-LAST:event_btnRegistrarPlataformaActionPerformed
 
     private void btnRegistrarEngineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEngineActionPerformed
@@ -801,6 +808,10 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        txtNombreEngine.setText(null);
+        txtCompaniaEngine.setText(null);
+        txtNombreEngine.requestFocus();
     }//GEN-LAST:event_btnRegistrarEngineActionPerformed
 
     private void btnRegistrarStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarStaffActionPerformed
@@ -810,6 +821,9 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        txtNombreStaff.setText(null);
+        txtNombreStaff.requestFocus();
     }//GEN-LAST:event_btnRegistrarStaffActionPerformed
 
     private void btnAceptarRegistroJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarRegistroJuegoActionPerformed

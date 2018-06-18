@@ -71,16 +71,17 @@ CREATE PROCEDURE crearEngine(@nombreEngine NVARCHAR(200), @compania NVARCHAR(200
 AS
 BEGIN
 	DECLARE @existeEngine UNIQUEIDENTIFIER = (SELECT id FROM engine WHERE nombre = @nombreEngine);
-	DECLARE @idCompania UNIQUEIDENTIFIER = (SELECT id FROM compania_engine WHERE nombre = @compania);
+	DECLARE @existeCompania UNIQUEIDENTIFIER = (SELECT id FROM compania_engine WHERE nombre = @compania);
+	DECLARE @idCOmpania UNIQUEIDENTIFIER;
 
 	IF @existeEngine IS NULL
 	BEGIN
-		IF @idCompania IS NULL
+		IF @existeCompania IS NULL
 		BEGIN
 			INSERT INTO compania_engine VALUES (NEWID(), @compania);
-			SET @idCompania = (SELECT id FROM compania_engine WHERE nombre = @compania);
 		END
 
+		SET @idCompania = (SELECT id FROM compania_engine WHERE nombre = @compania);
 		INSERT INTO engine VALUES (NEWID(), @nombreEngine, @idCompania);
 	END
 
@@ -88,23 +89,24 @@ BEGIN
 	BEGIN
 		PRINT('El engine ya existe.');
 	END
-END;
+END; -- DROP PROCEDURE crearEngine;
 GO
 
 CREATE PROCEDURE crearPlataforma(@nombrePlataforma NVARCHAR(200), @compania NVARCHAR(200))
 AS
 BEGIN
 	DECLARE @existePlataforma UNIQUEIDENTIFIER = (SELECT id FROM engine WHERE nombre = @nombrePlataforma);
-	DECLARE @idCompania UNIQUEIDENTIFIER = (SELECT id FROM compania_plataforma WHERE nombre = @compania);
+	DECLARE @existeCompania UNIQUEIDENTIFIER = (SELECT id FROM compania_plataforma WHERE nombre = @compania);
+	DECLARE @idCompania UNIQUEIDENTIFIER;
 
 	IF @existePlataforma IS NULL
 	BEGIN
-		IF @idCompania IS NULL
+		IF @existeCompania IS NULL
 		BEGIN
 			INSERT INTO compania_plataforma VALUES (NEWID(), @compania);
-			SET @idCompania = (SELECT id FROM compania_engine WHERE nombre = @compania);
-		END
-
+		END;
+		
+		SET @idCompania = (SELECT id FROM compania_plataforma WHERE nombre = @compania);
 		INSERT INTO plataforma VALUES (NEWID(), @nombrePlataforma, @idCompania);
 	END
 
@@ -112,7 +114,7 @@ BEGIN
 	BEGIN
 		PRINT('La plataforma ya existe.');
 	END
-END;
+END; -- DROP PROCEDURE crearPlataforma;
 GO
 
 CREATE PROCEDURE eliminarStaff (@idStaff UNIQUEIDENTIFIER)
@@ -121,15 +123,6 @@ BEGIN
 	DELETE FROM juego_staff WHERE fk_staff = @idStaff;
 	DELETE FROM staff WHERE id = @idStaff;
 END;
-
-INSERT INTO staff VALUES (NEWID(), 'FrostinoDev');
-SELECT * FROM staff;
-INSERT INTO genero VALUES (NEWID(), 'Simulador');
-SELECT * FROM genero;
-INSERT INTO juego VALUES (NEWID(), 'Frostino Simulator 2018', 'F46E9918-FD2E-4A8B-B524-FABD4D9E8467', '2018', '1E285159-9B1E-45A0-9E28-9745850ABAD2', 'FB74FBC3-FA34-4BEB-B15E-DB15FC0D1CD7');
-SELECT * FROM juego;
-INSERT INTO juego_staff VALUES (NEWID(), '5C2AA1EA-804E-4B78-AD86-71570557B640', '11DA3DB2-8A8D-4544-B663-FBBC6FFE70F4', 'Desarrollador Principal');
-SELECT * FROM juego_staff;
 GO
 
 CREATE TRIGGER new_update ON juego AFTER INSERT AS
@@ -197,6 +190,7 @@ BEGIN
 	PRINT 'Nombre: ' + @nombreStaff;
 	PRINT 'Cantidad de Juegos: ' + @max;
 END;
+GO
 
 CREATE PROCEDURE vincularJuegoStaff(@staff VARCHAR(200), @juego VARCHAR(200), @rol VARCHAR(100)) AS
 BEGIN
@@ -208,7 +202,7 @@ BEGIN
 		INSERT INTO staff VALUES (NEWID(), @staff);
 	END;
 
-	INSERT INTO juego_staff VALUES (NEWID(), @idJuego, @idStaff);
+	INSERT INTO juego_staff VALUES (NEWID(), @idJuego, @idStaff, @rol);
 END;
 GO
 
@@ -221,3 +215,17 @@ BEGIN
 	INSERT INTO juego VALUES (NEWID(), @titulo, @idGenero, @anio, @idPlataforma, @idEngine, @unidades, @version);
 END; -- DROP PROCEDURE crearJuego;
 GO
+
+/**
+Inserts de prueba:
+
+INSERT INTO staff VALUES (NEWID(), 'FrostinoDev');
+SELECT * FROM staff;
+INSERT INTO genero VALUES (NEWID(), 'Simulador');
+SELECT * FROM genero;
+INSERT INTO juego VALUES (NEWID(), 'Frostino Simulator 2018', 'F46E9918-FD2E-4A8B-B524-FABD4D9E8467', '2018', '1E285159-9B1E-45A0-9E28-9745850ABAD2', 'FB74FBC3-FA34-4BEB-B15E-DB15FC0D1CD7');
+SELECT * FROM juego;
+INSERT INTO juego_staff VALUES (NEWID(), '5C2AA1EA-804E-4B78-AD86-71570557B640', '11DA3DB2-8A8D-4544-B663-FBBC6FFE70F4', 'Desarrollador Principal');
+SELECT * FROM juego_staff;
+GO
+*/

@@ -16,7 +16,7 @@ public class Data {
     private ResultSet rs;
 
     public Data() throws ClassNotFoundException, SQLException {
-        con = new Conexion("bd_compania_juegos");
+        con = new Conexion("bd_mochasoft");
     }
 
     public void createStaff(String nombre) throws SQLException {
@@ -32,7 +32,7 @@ public class Data {
     }
 
     public void createGenero(String nombre) throws SQLException {
-        query = "INSERT INTO staff VALUES(NEWID(), '" + nombre + "');";
+        query = "INSERT INTO genero VALUES(NEWID(), '" + nombre + "');";
         con.ejecutar(query);
         con.close();
     }
