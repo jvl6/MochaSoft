@@ -9,6 +9,9 @@ public class CompaniaEngine {
     private int id;
     private String nombre;
 
+    public CompaniaEngine() {
+    }
+
     public CompaniaEngine(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;

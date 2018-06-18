@@ -197,3 +197,27 @@ BEGIN
 	PRINT 'Nombre: ' + @nombreStaff;
 	PRINT 'Cantidad de Juegos: ' + @max;
 END;
+
+CREATE PROCEDURE vincularJuegoStaff(@staff VARCHAR(200), @juego VARCHAR(200), @rol VARCHAR(100)) AS
+BEGIN
+	DECLARE @idJuego UNIQUEIDENTIFIER = (SELECT id FROM juego WHERE titulo = @juego);
+	DECLARE @idStaff UNIQUEIDENTIFIER = (SELECT id FROM staff WHERE nombre = @staff);
+
+	IF @idStaff IS NULL
+	BEGIN
+		INSERT INTO staff VALUES (NEWID(), @staff);
+	END;
+
+	INSERT INTO juego_staff VALUES (NEWID(), @idJuego, @idStaff);
+END;
+GO
+
+CREATE PROCEDURE crearJuego(@titulo VARCHAR(200), @genero VARCHAR(200), @anio DATE, @plataforma VARCHAR(200), @engine VARCHAR(200), @unidades BIGINT, @version FLOAT) AS
+BEGIN
+	DECLARE @idGenero UNIQUEIDENTIFIER = (SELECT id FROM genero WHERE nombre = @genero);
+	DECLARE @idPlataforma UNIQUEIDENTIFIER = (SELECT id FROM plataforma WHERE nombre = @genero);
+	DECLARE @idEngine UNIQUEIDENTIFIER = (SELECT id FROM engine WHERE nombre = @genero);
+
+	INSERT INTO juego VALUES (NEWID(), @titulo, @idGenero, @anio, @idPlataforma, @idEngine, @unidades, @version);
+END; -- DROP PROCEDURE crearJuego;
+GO

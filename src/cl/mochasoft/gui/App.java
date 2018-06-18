@@ -1,5 +1,7 @@
 package cl.mochasoft.gui;
 
+import cl.mochasoft.model.CompaniaEngine;
+import cl.mochasoft.model.CompaniaPlataforma;
 import cl.mochasoft.model.Data;
 import cl.mochasoft.model.Juego;
 import cl.mochasoft.model.Staff;
@@ -81,12 +83,12 @@ public class App extends javax.swing.JFrame {
         lblVersionJuego = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JTextField();
         txtAnio = new javax.swing.JTextField();
-        txtUnidadesVendidas = new javax.swing.JTextField();
         txtVersion = new javax.swing.JTextField();
         btnAceptarRegistroJuego = new javax.swing.JButton();
         cboGenero = new javax.swing.JComboBox<>();
         cboPlataforma = new javax.swing.JComboBox<>();
         cboEngine = new javax.swing.JComboBox<>();
+        spnUnidades = new javax.swing.JSpinner();
         pnlRegistroGenero = new javax.swing.JPanel();
         lblNombreGenero = new javax.swing.JLabel();
         txtNombreGenero = new javax.swing.JTextField();
@@ -97,12 +99,16 @@ public class App extends javax.swing.JFrame {
         lblCompaniaPlataforma = new javax.swing.JLabel();
         txtCompaniaPlataforma = new javax.swing.JTextField();
         btnRegistrarPlataforma = new javax.swing.JButton();
+        btnBuscarCompPlat = new javax.swing.JButton();
+        lblPlatEncontrado = new javax.swing.JLabel();
         pnlRegistroEngine = new javax.swing.JPanel();
         lblNombreEngine = new javax.swing.JLabel();
         lblCompaniaEngine = new javax.swing.JLabel();
         txtNombreEngine = new javax.swing.JTextField();
         txtCompaniaEngine = new javax.swing.JTextField();
         btnRegistrarEngine = new javax.swing.JButton();
+        lblEngineEncontrado = new javax.swing.JLabel();
+        btnBuscarCompEn = new javax.swing.JButton();
         pnlRegistroStaff = new javax.swing.JPanel();
         lblNombreStaff = new javax.swing.JLabel();
         txtNombreStaff = new javax.swing.JTextField();
@@ -342,6 +348,11 @@ public class App extends javax.swing.JFrame {
         lblVersionJuego.setText("Version Juego:");
 
         btnAceptarRegistroJuego.setText("Aceptar");
+        btnAceptarRegistroJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarRegistroJuegoActionPerformed(evt);
+            }
+        });
 
         cboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -375,7 +386,7 @@ public class App extends javax.swing.JFrame {
                             .addComponent(lblEngine))
                         .addGap(56, 56, 56)
                         .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboEngine, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboEngine, 0, 369, Short.MAX_VALUE)
                             .addComponent(cboPlataforma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlRegistroJuegoLayout.createSequentialGroup()
                         .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,7 +395,7 @@ public class App extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtVersion)
-                            .addComponent(txtUnidadesVendidas))))
+                            .addComponent(spnUnidades))))
                 .addContainerGap())
         );
         pnlRegistroJuegoLayout.setVerticalGroup(
@@ -413,7 +424,7 @@ public class App extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUnidadesVendidas)
-                    .addComponent(txtUnidadesVendidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlRegistroJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblVersionJuego)
@@ -430,6 +441,11 @@ public class App extends javax.swing.JFrame {
         lblNombreGenero.setText("Nombre:");
 
         btnRegistroGenero.setText("Aceptar");
+        btnRegistroGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroGeneroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlRegistroGeneroLayout = new javax.swing.GroupLayout(pnlRegistroGenero);
         pnlRegistroGenero.setLayout(pnlRegistroGeneroLayout);
@@ -454,7 +470,7 @@ public class App extends javax.swing.JFrame {
                     .addComponent(txtNombreGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistroGenero)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
 
         tbpPanel.addTab("Registro Género", pnlRegistroGenero);
@@ -466,6 +482,20 @@ public class App extends javax.swing.JFrame {
         lblCompaniaPlataforma.setText("Compañia:");
 
         btnRegistrarPlataforma.setText("Aceptar");
+        btnRegistrarPlataforma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarPlataformaActionPerformed(evt);
+            }
+        });
+
+        btnBuscarCompPlat.setText("Buscar");
+        btnBuscarCompPlat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCompPlatActionPerformed(evt);
+            }
+        });
+
+        lblPlatEncontrado.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout pnlRegistroPlataformaLayout = new javax.swing.GroupLayout(pnlRegistroPlataforma);
         pnlRegistroPlataforma.setLayout(pnlRegistroPlataformaLayout);
@@ -473,17 +503,25 @@ public class App extends javax.swing.JFrame {
             pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRegistroPlataformaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnRegistrarPlataforma)
+                .addGroup(pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlRegistroPlataformaLayout.createSequentialGroup()
-                        .addComponent(lblNombrePlataforma)
-                        .addGap(29, 29, 29)
-                        .addComponent(txtNombrePlataforma, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlRegistroPlataformaLayout.createSequentialGroup()
-                        .addComponent(lblCompaniaPlataforma)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCompaniaPlataforma)))
-                .addContainerGap(288, Short.MAX_VALUE))
+                        .addGroup(pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnRegistrarPlataforma)
+                            .addGroup(pnlRegistroPlataformaLayout.createSequentialGroup()
+                                .addGroup(pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegistroPlataformaLayout.createSequentialGroup()
+                                        .addComponent(lblNombrePlataforma)
+                                        .addGap(29, 29, 29))
+                                    .addGroup(pnlRegistroPlataformaLayout.createSequentialGroup()
+                                        .addComponent(lblCompaniaPlataforma)
+                                        .addGap(15, 15, 15)))
+                                .addGroup(pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCompaniaPlataforma)
+                                    .addComponent(txtNombrePlataforma, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarCompPlat))
+                    .addComponent(lblPlatEncontrado))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         pnlRegistroPlataformaLayout.setVerticalGroup(
             pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -495,10 +533,13 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlRegistroPlataformaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCompaniaPlataforma)
-                    .addComponent(txtCompaniaPlataforma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCompaniaPlataforma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCompPlat))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrarPlataforma)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblPlatEncontrado)
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         tbpPanel.addTab("Registro Plataforma", pnlRegistroPlataforma);
@@ -510,6 +551,20 @@ public class App extends javax.swing.JFrame {
         lblCompaniaEngine.setText("Compañia:");
 
         btnRegistrarEngine.setText("Aceptar");
+        btnRegistrarEngine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarEngineActionPerformed(evt);
+            }
+        });
+
+        lblEngineEncontrado.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        btnBuscarCompEn.setText("Buscar");
+        btnBuscarCompEn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCompEnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlRegistroEngineLayout = new javax.swing.GroupLayout(pnlRegistroEngine);
         pnlRegistroEngine.setLayout(pnlRegistroEngineLayout);
@@ -518,16 +573,21 @@ public class App extends javax.swing.JFrame {
             .addGroup(pnlRegistroEngineLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlRegistroEngineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegistroEngineLayout.createSequentialGroup()
-                        .addComponent(lblNombreEngine)
-                        .addGap(28, 28, 28)
-                        .addComponent(txtNombreEngine, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegistroEngineLayout.createSequentialGroup()
-                        .addComponent(lblCompaniaEngine)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCompaniaEngine, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnRegistrarEngine, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(310, Short.MAX_VALUE))
+                    .addGroup(pnlRegistroEngineLayout.createSequentialGroup()
+                        .addGroup(pnlRegistroEngineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegistroEngineLayout.createSequentialGroup()
+                                .addComponent(lblNombreEngine)
+                                .addGap(28, 28, 28)
+                                .addComponent(txtNombreEngine, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegistroEngineLayout.createSequentialGroup()
+                                .addComponent(lblCompaniaEngine)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCompaniaEngine, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnRegistrarEngine, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarCompEn))
+                    .addComponent(lblEngineEncontrado))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         pnlRegistroEngineLayout.setVerticalGroup(
             pnlRegistroEngineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,10 +599,13 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlRegistroEngineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCompaniaEngine)
-                    .addComponent(txtCompaniaEngine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCompaniaEngine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCompEn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrarEngine)
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEngineEncontrado)
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
         tbpPanel.addTab("Registro Engine", pnlRegistroEngine);
@@ -552,6 +615,11 @@ public class App extends javax.swing.JFrame {
         lblNombreStaff.setText("Nombre:");
 
         btnRegistrarStaff.setText("Aceptar");
+        btnRegistrarStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarStaffActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlRegistroStaffLayout = new javax.swing.GroupLayout(pnlRegistroStaff);
         pnlRegistroStaff.setLayout(pnlRegistroStaffLayout);
@@ -576,7 +644,7 @@ public class App extends javax.swing.JFrame {
                     .addComponent(txtNombreStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrarStaff)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         tbpPanel.addTab("Registro Staff", pnlRegistroStaff);
@@ -628,8 +696,8 @@ public class App extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tbpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(tbpPanel)
+                .addContainerGap())
         );
 
         pack();
@@ -675,6 +743,87 @@ public class App extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnVerJuegosPorAnioActionPerformed
 
+    private void btnRegistroGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroGeneroActionPerformed
+        String genero = txtNombreGenero.getText();
+        try {
+            dat.createGenero(genero);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRegistroGeneroActionPerformed
+
+    private void btnBuscarCompPlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCompPlatActionPerformed
+        try {
+            CompaniaPlataforma comp = dat.encontrarCompaniaPlataforma(txtCompaniaPlataforma.getText());
+            if (comp != null) {
+                txtCompaniaPlataforma.setText(comp.getNombre());
+                lblPlatEncontrado.setText("Compañía encontrada");
+            } else {
+                lblPlatEncontrado.setText("Compañía no encontrada.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarCompPlatActionPerformed
+
+    private void btnBuscarCompEnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCompEnActionPerformed
+        try {
+            CompaniaEngine comp = dat.encontrarCompaniaEngine(txtNombreEngine.getText());
+            
+            if (comp != null) {
+                txtCompaniaEngine.setText(comp.getNombre());
+                lblEngineEncontrado.setText("Compañía encontrada.");
+            } else {
+                lblEngineEncontrado.setText("Compañía no encontrada.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarCompEnActionPerformed
+
+    private void btnRegistrarPlataformaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPlataformaActionPerformed
+        String plataforma = txtNombrePlataforma.getText();
+        String comp = txtCompaniaPlataforma.getText();
+        
+        try {
+            dat.createPlataforma(plataforma, comp);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRegistrarPlataformaActionPerformed
+
+    private void btnRegistrarEngineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEngineActionPerformed
+        String engin = txtNombreEngine.getText();
+        String comp = txtCompaniaEngine.getText();
+        
+        try {
+            dat.createEngine(engin, comp);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRegistrarEngineActionPerformed
+
+    private void btnRegistrarStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarStaffActionPerformed
+        String nombre = txtNombreStaff.getText();
+        try {
+            dat.createStaff(nombre);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRegistrarStaffActionPerformed
+
+    private void btnAceptarRegistroJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarRegistroJuegoActionPerformed
+        String titulo = txtTitulo.getText();
+        String genero = (String) cboGenero.getSelectedItem();
+        String anio = txtAnio.getText();
+        String plataforma = (String) cboPlataforma.getSelectedItem();
+        String engine = (String) cboEngine.getSelectedItem();
+        String unidades = (String) spnUnidades.getValue();
+        String version = txtVersion.getText();
+        
+        
+    }//GEN-LAST:event_btnAceptarRegistroJuegoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -713,6 +862,8 @@ public class App extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarDespedirStaff;
     private javax.swing.JButton btnAceptarRegistroJuego;
+    private javax.swing.JButton btnBuscarCompEn;
+    private javax.swing.JButton btnBuscarCompPlat;
     private javax.swing.JButton btnRegistrarEngine;
     private javax.swing.JButton btnRegistrarPlataforma;
     private javax.swing.JButton btnRegistrarStaff;
@@ -731,12 +882,14 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel lblCompaniaPlataforma;
     private javax.swing.JLabel lblDespedirStaff;
     private javax.swing.JLabel lblEngine;
+    private javax.swing.JLabel lblEngineEncontrado;
     private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblJuegosPorAnio;
     private javax.swing.JLabel lblNombreEngine;
     private javax.swing.JLabel lblNombreGenero;
     private javax.swing.JLabel lblNombrePlataforma;
     private javax.swing.JLabel lblNombreStaff;
+    private javax.swing.JLabel lblPlatEncontrado;
     private javax.swing.JLabel lblPlataforma;
     private javax.swing.JLabel lblResultadosPorAnio;
     private javax.swing.JLabel lblTitulo;
@@ -758,6 +911,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel pnlVerJuegosPorAnio;
     private javax.swing.JPanel pnlVerStaff;
     private javax.swing.JPanel pnlVerStaffDespedido;
+    private javax.swing.JSpinner spnUnidades;
     private javax.swing.JTable tabJuegos;
     private javax.swing.JTable tabStaff;
     private javax.swing.JTable tabStaffDespedido;
@@ -772,7 +926,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreStaff;
     private javax.swing.JTextField txtNombreStaffDespedido;
     private javax.swing.JTextField txtTitulo;
-    private javax.swing.JTextField txtUnidadesVendidas;
     private javax.swing.JTextField txtVerJuegosPorAnio;
     private javax.swing.JTextField txtVerResultadosJuegosAnio;
     private javax.swing.JTextField txtVersion;

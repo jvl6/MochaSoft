@@ -10,6 +10,9 @@ public class Plataforma {
     private String nombre;
     private int fk_compania;
 
+    public Plataforma() {
+    }
+
     public Plataforma(int id, String nombre, int fk_compania) {
         this.id = id;
         this.nombre = nombre;

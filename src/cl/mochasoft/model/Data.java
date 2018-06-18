@@ -49,6 +49,12 @@ public class Data {
         con.close();
     }
 
+    public void createJuego(String titulo, String genero, String anio, String plataforma, String engine, String unidades, String version) throws SQLException {
+        query = "EXEC crearJuego '" + titulo + "','" + genero + "','" + anio + "','" + plataforma + "','" + engine + "'," + unidades + "," + version + ";";
+        con.ejecutar(query);
+        con.close();
+    }
+
     public List<Juego> viewJuegos() throws SQLException {
         query = "SELECT * FROM juego;";
         List<Juego> juegos = new ArrayList<>();
@@ -116,4 +122,33 @@ public class Data {
         return personal;
     }
 
+    public CompaniaPlataforma encontrarCompaniaPlataforma(String plataforma) throws SQLException {
+        query = "SELECT * FROM compania_plataforma WHERE nombre = '" + plataforma + "';";
+        rs = con.ejecutarSelect(query);
+
+        CompaniaPlataforma comp = null;
+        while (rs.next()) {
+            comp = new CompaniaPlataforma();
+            comp.setId(rs.getInt(1));
+            comp.setNombre(rs.getString(2));
+        }
+
+        con.close();
+        return comp;
+    }
+
+    public CompaniaEngine encontrarCompaniaEngine(String engine) throws SQLException {
+        query = "SELECT * FROM compania_engine WHERE nombre = '" + engine + "';";
+        rs = con.ejecutarSelect(query);
+
+        CompaniaEngine comp = null;
+        while (rs.next()) {
+            comp = new CompaniaEngine();
+            comp.setId(rs.getInt(1));
+            comp.setNombre(rs.getString(2));
+        }
+
+        con.close();
+        return comp;
+    }
 }

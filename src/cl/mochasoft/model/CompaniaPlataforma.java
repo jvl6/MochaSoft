@@ -9,6 +9,9 @@ public class CompaniaPlataforma {
     private int id;
     private String nombre;
 
+    public CompaniaPlataforma() {
+    }
+    
     public CompaniaPlataforma(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
